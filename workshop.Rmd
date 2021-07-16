@@ -19,7 +19,7 @@ Hey math boffins, welcome to the coding with R class! Let me introduce you to ou
 
 <img src="images/emi.png" width="120px">
 
-- Hi, I'm Emi! I'm a lecturer in statistica at Monash University.
+- Hi, I'm Emi! I'm a lecturer in statistics at Monash University.
 - This is ...
 
 ### Exercise 
