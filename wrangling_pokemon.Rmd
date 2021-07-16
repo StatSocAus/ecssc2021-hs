@@ -134,7 +134,7 @@ pokemon %>%
 
 # Grammar of graphics
 
-Before we begin this section, I would like to invite you to take a look at the two plots below and tell me what do you thin the (only) difference is between the two plots?
+Before we begin this section, I would like to invite you to take a look at the two plots below and tell me what do you think the (only) difference is between the two plots?
 
 ```{r, echo = FALSE}
 pokemon %>% 
@@ -154,3 +154,38 @@ pokemon %>%
   facet_wrap(~type1)
 ```
 
+In both plots, notice that 
+
++ x-axis is `attack`
++ y-axis is `defense`
++ colouring variable is `type1`
++ Each observation (pokemon) is a simple point
+
+From that perspective, both plots are presenting the same information to you. However, the second plot has one extra feature, in that each type gets its own little plot, or "facet". 
+
+We are now ready to talk about the grammar of graphics. There are hundreads of plots that statisticians can use, but we need a consistent way to describe these plots and the rules to describe these plots is like how we have grammar in English to govern how language is used.
+
+The **grammar of graphics** is a language that maps variables into graphical elements. Instead of uniquely naming specialist plots, like barchart, pie chart, histogram ... it provides the description of a plot, that enables comparing how they are similar and different. It gives us a more formal, and yes, mathematical way to make data plots. 
+
+The grammar of graphics has these major elements:
+
+```
+ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(
+     mapping = aes(<MAPPINGS>),
+     stat = <STAT>, 
+     position = <POSITION>
+  ) +
+  <COORDINATE_FUNCTION> +
+  <FACET_FUNCTION>
+```
+  
+- DATA: This is the data.frame or tibble that you are starting from
+- MAPPINGS: Specific details of how a variable is mapped into the plot
+- GEOM: The graphical element to use, e.g. point, line, rectangle, density, boxplot, ...
+- STAT: A statistical calculation, if necessary, e.g. bin to make a histogram or barchart.
+- POSITION: Some types of plots, like barcharts conventionally have small deviations in design, like stacked, side-by-side, 100%. Position enables this type of shift.
+- COORDINATE: Most commonly we are using cartesian coordinates, but some plots benefit by putting them in polar coordinates, or even in a special map ratio, or some variables shown on a log scale.
+- FACET: Split the data into subsets and plot separately. Good for making comparisons across groups. 
+
+Here are some examples. We will use with a smaller subset of the pokemon data for efficiency.
