@@ -1,0 +1,156 @@
+---
+title: "wrangling_pokemon"
+author: "Kevin Wang"
+date: "16/07/2021"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+pokemon = readr::read_csv("./data/pokemon.csv")
+```
+
+
+```{r, eval = TRUE}
+## remotes::install_github("schochastics/Rokemon")
+library(Rokemon)
+readr::write_csv(
+  x = Rokemon::pokemon %>% 
+    dplyr::select(pokedex_number, name, 
+                  type1, type2, 
+                  # generation, is_legendary,
+                  attack, defense,
+                  # hp, speed,
+                  sp_attack, sp_defense
+                  ),
+  file = "./data/pokemon.csv")
+```
+
+
+## Filter
+
+Filter is used to pick some cases or observations (rows) in the data. Here's an example for the `pokemon` data. We will choose just the pokemons that are "grass" type (use the `type1` variable). 
+
+```{r echo=TRUE}
+pokemon %>% filter(type1 == "grass") %>% tally()
+```
+
+*Try it!* Do these exercises:
+
+- Filter the pokemon data to pick only pokemons that are "fire" type (use the `type2` variable)
+- Filter the pokemons that are more than 150 units in `attack` (HINT: you can use `>` or `<` if the variable is just made up of numbers)
+- Filter the pokemon that are either "fire" in `type1` **or** "water" in `type1` (HINT: You need to use the operator `%in%` like this `%in% c("fire","water"))`
+- Filter the pokemon that are "fire" in `type1` **and** "water" in `type2` (HINT: You can add additional conditions in the `filter` function by adding an extra comma like `filter(type1 == "fire", ...)`)
+
+```{r, eval = FALSE}
+pokemon %>% filter(type2 == "fire")
+pokemon %>% filter(attack > 150)
+pokemon %>% filter(type1 %in% c("fire", "water"))
+pokemon %>% filter(type1 == "fire", type2 == "water")
+```
+
+
+## Select
+
+Select is used to pick some variables in the data. Here's an example for the `pokemon` data. We will select just the variables `name` and `attack`.
+
+```{r echo=TRUE}
+pokemon %>% select(name, attack) 
+```
+
+
+*Try it!* Select the variables `name`, `type1`, `attack` and `defense`.
+
+
+
+## Arrange
+
+`arrange` sorts the data by values in one of the columns. Here's an example which also involves selecting a subset of variables.
+
+```{r echo=TRUE}
+pokemon %>% 
+  select(name, attack) %>%
+  arrange(desc(attack))
+```
+
+Note that `desc` arranges in descending order. 
+
+*Try it!* Arrange carat by price, in increasing order.
+
+
+```{r arrange}
+pokemon %>% 
+  select(name, attack, defense) %>%
+  arrange(desc(attack))
+```
+
+Arrange is mostly used to get quick views of the numbers.
+
+## Mutate
+
+I love the name mutate! It means to create new variables, or modify existing ones. For the pokemon dataset, we might be interested in examining the sum of both `attack` and `sp_attack`. Here's how we can create this variable:
+
+```{r}
+pokemon %>% 
+  mutate(total_attack = attack + sp_attack)
+```
+
+*Try it!* Compute a new variable called `total_defense`, as the sum of `defense` and `sp_defense`.
+
+
+## Summarise
+
+Summarise is the workhorse function. It takes columns of the data, and reduces them to single numbers. It is most useful when we want to compute statistics for our. 
+
+For the pokemons, we might be interested in computing the mean, minimum and maximum of `attack` value of all pokemons 
+
+```{r}
+pokemon %>% 
+  summarise(
+    min = min(attack),
+    mean = mean(attack),
+    max = max(attack)
+  )
+```
+
+However, the `attack` value might be dependent on the type of the pokemon, so we can compute this separately for each of the `type1` categories. Which type of pokemon has the highest average attack?
+
+```{r}
+pokemon %>% 
+  group_by(type1) %>% 
+  summarise(mean = mean(attack))
+```
+
+If it helps, we can use `arrange` to help us to answer this question. 
+
+```{r}
+pokemon %>% 
+  group_by(type1) %>% 
+  summarise(mean = mean(attack)) %>% 
+  arrange(desc(mean))
+```
+
+# Grammar of graphics
+
+Before we begin this section, I would like to invite you to take a look at the two plots below and tell me what do you thin the (only) difference is between the two plots?
+
+```{r, echo = FALSE}
+pokemon %>% 
+  ggplot(aes(x = attack, 
+             y = defense,
+             colour = type1)) +
+  geom_point()
+```
+
+
+```{r, echo = FALSE}
+pokemon %>% 
+  ggplot(aes(x = attack, 
+             y = defense,
+             colour = type1)) +
+  geom_point() +
+  facet_wrap(~type1)
+```
+
