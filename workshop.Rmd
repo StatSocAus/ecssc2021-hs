@@ -87,21 +87,6 @@ quiz(
 )
 ```
 
-## Simulation
-
-Let's pretend that we are math teachers and we've just given the class a test. R can be used to simulate results like this. 
-
-- The code `rnorm(n = 35, mean = 70, sd = 10)` will generate a sample of size 35 from a normal model with mean 70 and standard deviation 10. 
-- But when you do this you will likely want to save the result into a data object. Lets call this `scores`. 
-- To save it you need to assign the result to `scores` using the `gets` operator `<-`. This is just like an `=` sign. 
-
-*Try it, `scores <- rnorm(n = 35, mean = 70, sd = 10)`*
-
-```{r rnorm, exercise=TRUE}
-
-```
-
-Oh, nothing happens! That is because we have saved the result into a data object. Let's check if we have created a dataset. You can check the length of scores using `length(scores)`. It should be 35. You can also compute the mean and standard deviation of the data using `mean(scores)` and `sd(scores)`
 
 ## Functions
 
@@ -484,67 +469,6 @@ quiz(
 
 There is a chapter on visualisation in [R for Data Science](http://r4ds.had.co.nz/data-visualisation.html) with lots of examples. If you have time, take a skim through this and try out some of the ideas. There is also a [graphics cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf) that can be useful to learn about all sorts of geoms, options, transformations, themes, ...
 
-## YOUR TURN: PISA data
-
-Every three years the OECD conducts tests of workforce readiness on around 500,000 15 year olds world wide. The last test's were done in 2015, and the next will be conducted next year. Details about the tests can be found by going to the [OECD PISA website](http://www.oecd.org/pisa). 
-
-*If you click on the `PISA Test` link you will be able to test out your skills. Try it!* 
-
-*How well did you do?*
-
-## Student results
-
-The data from the 2015 results can be downloaded from the `Data` [link](http://www.oecd.org/pisa/data/2015database/). There are multiple data sets, but the one that we will use for this workshop is the student database. We have downloaded this data, and extracted the results for Australia, for you, so you don't need to do this. But you need to understand what is in the database. The student database has test scores for 14,530 Australian 15 year olds. The students were tested on math, science and reading, and there were special topics in science that were tested in that year. In addition, students completed a survey to provide information on their household (how many TVs, books, ...), their gender, and birth year, how supportive their parents are, what their friends like to do, how much time do they spend studying out of hours, and about their attitudes to school, subjects, and teachers. Overall, there are 921 variables!! In the subset we have made there are 44 of these variables. 
-
-Other tables available to download contain survey responses to questionnaires provided to the school principal, and sent home to parents. We won't be working with this information today.
-
-```{r pisa}
-quiz(
-  question("What age are the students that take the test?",
-    answer("12"),
-    answer("15", correct = TRUE),
-    answer("18"),
-    answer("21")
-  ),
-  question("How many students in Australia were tested in 2015",
-    answer("530"),
-    answer("1,453"),
-    answer("14,530", correct = TRUE),
-    answer("145,300")
-    ),
-  question("What subjects are tested?",
-    answer("math", correct = TRUE),
-    answer("science", correct = TRUE),
-    answer("reading", correct = TRUE),
-    answer("writing")
-    ) 
-)
-```
-
-## Building a web story 
-
-To make it easier for others to explore a data set, now that you can be an expert(!), we can put it into a web document, called a flexdashboard. You can learn more about them at the RStudio Rmarkdown flexdashboards [tutorial](http://rmarkdown.rstudio.com/flexdashboard/using.html). 
-
-And you can see the example one that we have built, by opening the file `pisa.Rmd` in your RStudio window. Click `Run document` and the app will run on your computer. Alternatively, you can view it by pointing your web browser to [https://visnut.shinyapps.io/pisa/](https://visnut.shinyapps.io/pisa/). Here's what you will see:
-
-![](images/fdb1.png)
-![](images/fdb2.png)
-
-Flexdashboards are written in Rmarkdown. Its a really simple typesetting language, and you should only need to know three things:
-
-- At the very top of the file there is a paragraph starting and ending with `---`. This sets up the heading of the document, and formatting options.
-- `###` Makes a heading in the document
-- The lines between ` ```{r}` and ` ``` ` are lines of R code, that are run when the document is compiled.
-
-There is an Rmarkdown cheatsheet [here](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)
-
-The rest of the flexdashboard is contructed using some special user interface items, e.g. 
-
-- `sidebarPanel()` sets up the items on the left of the window where users can choose parameters for the plots. 
-- `fillRow` does some sizing of the components on the window
-- `plotlyOutput` tells the app that we want to use interactive graphics, it takes the ggplot2 plot and uses the `plotly` package to make it interactive.
-
-Read through the flex dashboards [tutorial](http://rmarkdown.rstudio.com/flexdashboard/using.html) and familiarise yourself with some of the ways that an app can be modified, and constructed. The `pisa.Rmd` file has 72 lines to produce a pretty flexible interface to the PISA data.
 
 ## Goal for the day
 
