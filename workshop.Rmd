@@ -20,7 +20,13 @@ Hey math boffins, welcome to the coding with R class! Let me introduce you to ou
 <img src="images/emi.png" width="120px">
 
 - Hi, I'm Emi! I'm a lecturer in statistics at Monash University.
-- This is ...
+- (WHAT DO YOU DO EMI?)
+
+<img src="images/kevin.jpg" width="120px">
+
+- Hi, I'm Kevin! I'm a statistician at CSL Behring.
+- I use statistics to control the quality of life-saving medicines and vaccines. 
+
 
 ### Exercise 
 
