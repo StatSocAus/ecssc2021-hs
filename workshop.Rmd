@@ -1,7 +1,8 @@
 ---
 title: "Tutorial"
 output: 
-  learnr::tutorial
+  learnr::tutorial:
+    toc_depth: 3
 runtime: shiny_prerendered
 ---
 
@@ -247,6 +248,24 @@ quiz(
 )
 ```
 
+## Loading the `pokemon` data
+
+Today, we will play with a Pokemon data. This data was originally sourced from [Kaggle](https://www.kaggle.com/rounakbanik/pokemon) and recorded important imformation about 801 Pokemons. 
+
+For this tutorial, you will play with a subset of these data. And we have loaded the data for you here:
+
+```{r, echo = TRUE}
+pokemon = read_csv("data/pokemon_demo.csv")
+```
+
+If you want, you can play with the full data at the end of this tutorial by running the code: 
+
+```{r, eval = FALSE, echo = TRUE}
+pokemon = read_csv("data/pokemon_full.csv")
+```
+
+
+
 ## Wrangling verbs
 
 The vast majority of data cleaning tasks can be handled with five verbs:
@@ -261,53 +280,81 @@ Oh, and if you use the pipe, `%>%`, you can string several of these actions toge
 
 You can find a data wrangling cheatsheet [here](https://github.com/rstudio/cheatsheets/raw/master/source/pdfs/data-transformation-cheatsheet.pdf).
 
-## Filter
 
-Filter is used to pick some cases or observations in the data. Here's an example for the diamonds data. We will choose just diamonds with a `Fair` cut. And to save printing all this to screen, we will check how many diamonds fall into this group.
+### Filter
+
+Filter is used to pick some cases or observations (rows) in the data. Here's an example for the `pokemon` data. We will choose just the Pokemons that are "grass" type (use the `type1` variable). 
+
+```{r, eval = TRUE}
+## remotes::install_github("schochastics/Rokemon")
+library(Rokemon)
+
+readr::write_csv(
+  x = Rokemon::pokemon %>% 
+    dplyr::select(pokedex_number, name, 
+                  type1, type2, 
+                  # generation, is_legendary,
+                  height_m, weight_kg,
+                  attack, defense
+                  # hp, speed,
+                  # sp_attack, sp_defense
+                  ),
+  file = "./data/pokemon_demo.csv")
+
+readr::write_csv(
+  x = Rokemon::pokemon %>% dplyr::select(-abilities),
+  file = "./data/pokemon_full.csv")
+```
 
 ```{r echo=TRUE}
-diamonds %>% filter(cut == "Fair") %>% tally()
+pokemon %>% filter(type1 == "grass")
 ```
 
 *Try it!* Do these exercises:
 
-- Filter the diamonds data to pick only diamonds that cost less than $400
-- Filter diamonds with a Fair cut and cost less than $400
-- Filter the diamonds that have cut "Fair" or "Good" (HINT: You need to use the operator `%in%` like this `%in% c("Fair","Good"))`
+- Filter the `pokemon` data to pick only Pokemons that are "fire" type (use the `type2` variable)
+- Filter the Pokemons that are more than 150 units in `attack` (HINT: you can use `>` or `<` if the variable is just made up of numbers)
+- Filter the Pokemons that are either "fire" in `type1` **or** "water" in `type1` (HINT: You need to use the operator `%in%` like this `%in% c("fire","water"))`
+- Filter the POkemons that are "fire" in `type1` **and** "water" in `type2` (HINT: You can add additional conditions in the `filter` function by adding an extra comma like `filter(type1 == "fire", ...)`)
+
+```{r, eval = FALSE}
+pokemon %>% filter(type2 == "fire")
+pokemon %>% filter(attack > 150)
+pokemon %>% filter(type1 %in% c("fire", "water"))
+pokemon %>% filter(type1 == "fire", type2 == "water")
+```
 
 ```{r filter, exercise=TRUE}
 
 ```
 
-## Select
+### Select
 
-Select is used to pick some variables in the data. Here's an example for the diamonds data. We will select just the variables carat and price, thinking that we might make a model for price built on the size of the diamond.
+Select is used to pick some variables in the data. Here's an example for the `pokemon` data. We will select just the variables `name` and `attack`.
 
 ```{r echo=TRUE}
-diamonds %>% select(carat, price) 
+pokemon %>% select(name, attack) 
 ```
 
-*Try it!* Select the variables `x`, `y`, `z`
-
+*Try it!* Select the variables `name`, `type1`, `attack` and `defense`.
 
 ```{r select, exercise=TRUE}
 
 ```
 
-## Arrange
+### Arrange
 
-Arrange sorts the data by values in one of the columns. Here's an example which also involves selecting a subset of variables.
-
+`arrange` sorts the data by values in one of the columns. Here's an example which also involves selecting a subset of variables.
 
 ```{r echo=TRUE}
-diamonds %>% select(carat, price) %>%
-  arrange(desc(price))
+pokemon %>% 
+  select(name, attack) %>%
+  arrange(desc(attack))
 ```
 
 Note that `desc` arranges in descending order. 
 
-*Try it!* Arrange carat by price, in increasing order.
-
+*Try it!* Arrange Pokemons by `attack`, in increasing order.
 
 ```{r arrange, exercise=TRUE}
 
@@ -315,39 +362,56 @@ Note that `desc` arranges in descending order.
 
 Arrange is mostly used to get quick views of the numbers.
 
-## Mutate
+### Mutate
 
-I love the name mutate! It means to create new variables, or modify existing ones. For the diamonds, we might be interested in examining the price per carat of a diamond. Here's how we can create this variable:
+I love the name mutate! It means to create new variables, or modify existing ones. For the `pokemon` dataset, we might be interested in examining the sum of both `attack` and `defense` as a simple way of summairsing a Pokemon's ability. Here's how we can create this variable:
 
 ```{r echo=TRUE}
-diamonds %>% mutate(ppc = price/carat)
+pokemon %>% 
+  mutate(total = attack + defense)
 ```
 
-*Try it!* Compute a new variable called size, based on a volume as measured by `x`, `y`, `z`. Is it the same or different from carat?
+*Try it!* Compute a new variable called `bmi` (body mass index), which is computed as:
 
+$$bmi = \frac{\text{weight}}{\text{height}^2}.$$
 
 ```{r mutate, exercise=TRUE}
 
 ```
 
-## Summarise
+### Summarise
 
-Summarise is the workhorse function. It takes columns of the data, and reduces them to single numbers. It most useful when we want to compute statistics for subsets of the data.  For the diamonds, we might be interested in computing the mean and standard deviation price of price. 
+Summarise is the workhorse function. It takes columns of the data, and reduces them to single numbers. It is most useful when we want to compute statistics for our. 
 
-```{r echo=TRUE}
-diamonds %>% summarise(m=mean(price, na.rm=TRUE), 
-                       s=sd(price, na.rm=TRUE))
-```
-
-Price might be dependent on the color of the diamond, so we can compute this separately for each of the color categories. Which  color is the most expensive?
+For the `pokemon` data, we might be interested in computing the mean, minimum and maximum of `attack` value of all Pokemons. 
 
 ```{r echo=TRUE}
-diamonds %>% group_by(color) %>%
-  summarise(m=mean(price, na.rm=TRUE), 
-                       s=sd(price, na.rm=TRUE))
+pokemon %>% 
+  summarise(
+    min = min(attack),
+    mean = mean(attack),
+    max = max(attack)
+  )
+```
+S
+However, the `attack` value might be dependent on the type of the Pokemons, so we can compute this separately for each of the `type1` categories. Which type of Pokemon has the highest average `attack`?
+
+```{r echo=TRUE}
+pokemon %>% 
+  group_by(type1) %>% 
+  summarise(mean = mean(attack))
 ```
 
-*Try it!* Compute the mean and standard deviation for (a) the cut, (b) clarity of diamond.
+If it helps, we can use `arrange` to better help us to answer this question. 
+
+```{r}
+pokemon %>% 
+  group_by(type1) %>% 
+  summarise(mean = mean(attack)) %>% 
+  arrange(desc(mean))
+```
+
+*Try it!* Compute the mean and standard deviation for (a) `attack`, (b) `defense`.
 
 ```{r summarise, exercise=TRUE}
 
@@ -355,8 +419,40 @@ diamonds %>% group_by(color) %>%
 
 ## Grammar of graphics
 
-The grammar of graphics is a language that maps variables into graphical elements. Instead of uniquely naming specialist plots, like barchart, pie chart, histogram ... it provides the description of a plot, that enables comparing how they are similar and different. It gives us a more formal, and yes, mathematical way to make data plots. 
-The grammar of graphics has these major elements:
+Before we begin this section, I would like to invite you to take a look at two plots below and tell me what do you think the (only) difference is between the two plots?
+
+```{r, echo = FALSE, fig.height=6, fig.width=6}
+pokemon %>% 
+  ggplot(aes(x = attack, 
+             y = defense,
+             colour = type1)) +
+  geom_point()
+```
+
+
+```{r, echo = FALSE, fig.height=6, fig.width=6}
+pokemon %>% 
+  ggplot(aes(x = attack, 
+             y = defense,
+             colour = type1)) +
+  geom_point() +
+  facet_wrap(~type1)
+```
+
+
+In both plots, notice that:
+
++ x-axis is `attack`
++ y-axis is `defense`
++ Each observation (a Pokemon) is a simple point
++ colouring on the points is `type1`
+
+From that perspective, both plots are presenting the same information to you! However, the second plot has one extra visual element, in that each type gets its own little plot, or "facet".
+
+We are now ready to talk about the **grammar of graphics**. The grammar of graphics is a language that maps variables into graphical elements. If you take a look at how we have described the plots above, each graphical element (x-axis, y-axis, etc) correspond to one and only one variable (`attack`, `defense`, etc). Thus, instead of uniquely naming specialist plots, like barchart, pie chart, histogram... grammar of graphics provides a consistent way to describe a plot. If the two plots are communicating the same information except the "facet" component, then it makes sense that the codes that generated the two plots should be identical except that "facet" part (we will see soon how these are generated soon). It enables us to consistently compare how plots are similar and different. It gives us a more formal, and yes, mathematical way to make data plots. 
+
+
+Grammar of graphics is implemented as a part of the `ggplot2` package which is a part of the `tidyverse`. A ggplot has these major elements:
 
 ```
 ggplot(data = <DATA>) + 
@@ -369,112 +465,257 @@ ggplot(data = <DATA>) +
   <FACET_FUNCTION>
 ```
   
-- DATA: This is the data.frame or tibble that you are starting from
-- MAPPINGS: Specific details of how a variable is mapped into the plot
-- GEOM: The graphical element to use, e.g. point, line, rectangle, density, boxplot, ...
-- STAT: A statistical calculation, if necessary, e.g. bin to make a histogram or barchart.
-- POSITION: Some types of plots, like barcharts conventionally have small deviations in design, like stacked, side-by-side, 100%. Position enables this type of shift.
-- COORDINATE: Most commonly we are using cartesian coordinates, but some plots benefit by putting them in polar coordinates, or even in a special map ratio, or some variables shown on a log scale.
-- FACET: Split the data into subsets and plot separately. Good for making comparisons across groups. 
+- **DATA**: This is the `data.frame` or `tibble` that you are starting from
+- **MAPPINGS**: Specific details of how a variable is mapped into the plot
+- **GEOM**: The graphical element to use, e.g. point, line, rectangle, density, boxplot, ...
+- **STAT**: A statistical calculation, if necessary, e.g. bin to make a histogram or barchart.
+- **POSITION**: Some types of plots, like barcharts conventionally have small deviations in design, like stacked, side-by-side, 100%. Position enables this type of shift.
+- **COORDINATE**: Most commonly we are using cartesian coordinates, but some plots benefit by putting them in polar coordinates, or even in a special map ratio, or some variables shown on a log scale.
+- **FACET**: Split the data into subsets and plot separately. Good for making comparisons across groups. 
 
-Here are some examples. We will use with a smaller subset of the diamonds for efficiency.
+The `+` operation behaves exactly like you expect: it "adds" additional graphical elements or manipulations on the plot. This is similar to how you would draw a picture in real life first by finding some contents (in our case, the data) to draw on, then deciding what should be in the picture (the geom) and finally adding on other elements (the mappings, e.g. colours).
 
-```{r echo=TRUE}
-diamonds_small <- diamonds %>% sample_n(1000)
-ggplot(diamonds_small) +
-  geom_point(aes(x=carat, y=price))
+
+
+### Making scatter plot
+
+We will now try to construct the scatter plots above. Notice how we have described the mapping between the variables, this is exactly how we will construct the plot!
+
+```{r, echo = FALSE, fig.height=6, fig.width=6}
+ggplot(pokemon) +
+  geom_point(aes(x = attack, 
+                 y = defense,
+                 colour = type1))
 ```
 
-This is a scatterplot of price by carat. There is a hint in the plot that carat tends to fall along some standard values, e.g. 1, 1.5, ... There are more small diamonds than larger ones - we would describe carat as right-skewed. Price is also right-skewed, as there are many more low prices diamonds than expensive ones. 
+This plot doesn't look too bad, however, one thing that we noticed was that there are lots of types and they are overlaying on top of each other on the same plot. How would we improve over this? This is exactly why we use facets in the first example to separate out the points by types. Facetting is very easy in ggplot, it simply needs an extra line and a specification of which variable should be used as the facets.
 
-```{r echo=TRUE}
-ggplot(diamonds_small) +
-  geom_bar(aes(x=cut))
+```{r, fig.height=6, fig.width=6}
+ggplot(pokemon) +
+  geom_point(aes(x = attack, 
+                 y = defense,
+                 colour = type1)) +
+  facet_wrap(~type1)
 ```
 
-This is a barchart of cut of the diamond. We can see that most diamonds have an "Ideal" cut, and there are very few "Fair" cut diamonds.
+This plot is better in that we can compare the scattering of points across different types of Pokemons now whereas before, our eyes are too busy trying to identify the colours. In fact, you will notice that we used the `type1` variable twice, which means that this variable appeared twice as two different visual elements - once as colour and once as facets. This is ok, but it can be redundant. Having a consistent way of describing plots allows us to notice such things and we may even decide removing `type1` as a colour variable. 
 
-```{r echo=TRUE}
-ggplot(diamonds_small) +
-  geom_point(aes(x=carat, y=price, colour=cut))
-```
+**Try it:** remove the `type1` as the colouring variable in the plot above. What is the default colour of `geom_point`?
 
-This is a scatterplot of price by carat, where points are coloured by the cut of the diamond. It is hard to see much difference in price between the cuts, there's a lot of overlap. It can be helpful to focus the view to display a model fit, instead of (or with) the points. 
-
-```{r echo=TRUE}
-ggplot(diamonds_small) +
-  geom_smooth(aes(x=carat, y=price, colour=cut), se=FALSE)
-```
-
-There's really not much difference, at least for this subset. Maybe the Ideal cut has very slightly higher relative price.
-
-Let's now look at two categorical variables. We examine cut and clarity. (Note that with a barchart, we need to use `fill` rather than `colour` to paint in the bars.)
-
-```{r echo=TRUE}
-ggplot(diamonds_small) +
-  geom_bar(aes(x=cut, fill=clarity))
-```
-
-To examine the association between two categorical variables, it can be better to focus on proportions, rather than counts. The counts in the different cut categories are very different, and its hard to be able to say that the proportion of the clarity categories are the same or different in each bar. Here's where position helps:
-
-```{r echo=TRUE}
-ggplot(diamonds_small) +
-  geom_bar(aes(x=cut, fill=clarity), position="fill")
-```
-
-Now we can see that there are differences in the clarity for different cuts. The Ideal cut tends not to have I1 clarity diamonds, and the Fair cut diamonds tend not to have any IF clarity diamonds. 
-
-*Try it!* Change the position to be `dodge`, and see what type of plot is created.
-
-```{r dodge, exercise=TRUE}
+```{r ggplot-point, exercise = TRUE}
 
 ```
 
-Its also possible to make separate plots for each of the clarity categories, using facet:
+<!-- Here are some examples. We will use with a smaller subset of the diamonds for efficiency. -->
 
-```{r echo=TRUE}
-ggplot(diamonds_small) +
-  geom_bar(aes(x=cut, fill=clarity)) +
-  facet_wrap(~clarity, ncol=4, scales="free_x") +
-  coord_flip() + theme(legend.position="bottom")
-```
+<!-- ```{r echo=TRUE} -->
+<!-- diamonds_small <- diamonds %>% sample_n(1000) -->
+<!-- ggplot(diamonds_small) + -->
+<!--   geom_point(aes(x=carat, y=price)) -->
+<!-- ``` -->
 
-Now we can see the the distribution of cuts is different in the l1 and SI2 clarity categories, but fairly similar in the others. The IF clarity group is almost exclusively Ideal cut. 
+<!-- This is a scatterplot of price by carat. There is a hint in the plot that carat tends to fall along some standard values, e.g. 1, 1.5, ... There are more small diamonds than larger ones - we would describe carat as right-skewed. Price is also right-skewed, as there are many more low prices diamonds than expensive ones.  -->
 
-When you have a categorical variable, and a quantitative variable, a good type of display is the side-by-side boxplot. Let's look at price by cut.
+<!-- ```{r echo=TRUE} -->
+<!-- ggplot(diamonds_small) + -->
+<!--   geom_bar(aes(x=cut)) -->
+<!-- ``` -->
 
-```{r echo=TRUE}
-ggplot(diamonds_small) +
-  geom_boxplot(aes(x=cut, y=price, fill=cut))
-```
+<!-- This is a barchart of cut of the diamond. We can see that most diamonds have an "Ideal" cut, and there are very few "Fair" cut diamonds. -->
 
-We can see that the Fair cut diamonds tend to be slightly more expensive. 
+<!-- ```{r echo=TRUE} -->
+<!-- ggplot(diamonds_small) + -->
+<!--   geom_point(aes(x=carat, y=price, colour=cut)) -->
+<!-- ``` -->
 
-```{r boxplot}
-quiz(
-  question("In a boxplot what does the line in the middle of the box represent?",
-    answer("median", correct = TRUE),
-    answer("mean"),
-    answer("standard deviation"),
-    answer("Interquartile range")
-  ),
-  question("In a boxplot what does the box represent?",
-    answer("median"),
-    answer("mean"),
-    answer("standard deviation"),
-    answer("interquartile range", correct = TRUE)
-  )
-)
-```
+<!-- This is a scatterplot of price by carat, where points are coloured by the cut of the diamond. It is hard to see much difference in price between the cuts, there's a lot of overlap. It can be helpful to focus the view to display a model fit, instead of (or with) the points.  -->
 
-*Try it!* Examine the side-by-side boxplot of price by clarity. Is there a difference in price across the different clarity groups? Also try out `geom_violin` instead of `geom_boxplot`. What does this do? 
+<!-- ```{r echo=TRUE} -->
+<!-- ggplot(diamonds_small) + -->
+<!--   geom_smooth(aes(x=carat, y=price, colour=cut), se=FALSE) -->
+<!-- ``` -->
 
-```{r violin, exercise=TRUE}
+<!-- There's really not much difference, at least for this subset. Maybe the Ideal cut has very slightly higher relative price. -->
 
-```
+<!-- Let's now look at two categorical variables. We examine cut and clarity. (Note that with a barchart, we need to use `fill` rather than `colour` to paint in the bars.) -->
+
+<!-- ```{r echo=TRUE} -->
+<!-- ggplot(diamonds_small) + -->
+<!--   geom_bar(aes(x=cut, fill=clarity)) -->
+<!-- ``` -->
+
+<!-- To examine the association between two categorical variables, it can be better to focus on proportions, rather than counts. The counts in the different cut categories are very different, and its hard to be able to say that the proportion of the clarity categories are the same or different in each bar. Here's where position helps: -->
+
+<!-- ```{r echo=TRUE} -->
+<!-- ggplot(diamonds_small) + -->
+<!--   geom_bar(aes(x=cut, fill=clarity), position="fill") -->
+<!-- ``` -->
+
+<!-- Now we can see that there are differences in the clarity for different cuts. The Ideal cut tends not to have I1 clarity diamonds, and the Fair cut diamonds tend not to have any IF clarity diamonds.  -->
+
+<!-- *Try it!* Change the position to be `dodge`, and see what type of plot is created. -->
+
+<!-- ```{r dodge, exercise=TRUE} -->
+
+<!-- ``` -->
+
+<!-- Its also possible to make separate plots for each of the clarity categories, using facet: -->
+
+<!-- ```{r echo=TRUE} -->
+<!-- ggplot(diamonds_small) + -->
+<!--   geom_bar(aes(x=cut, fill=clarity)) + -->
+<!--   facet_wrap(~clarity, ncol=4, scales="free_x") + -->
+<!--   coord_flip() + theme(legend.position="bottom") -->
+<!-- ``` -->
+
+<!-- Now we can see the the distribution of cuts is different in the l1 and SI2 clarity categories, but fairly similar in the others. The IF clarity group is almost exclusively Ideal cut.  -->
+
+<!-- When you have a categorical variable, and a quantitative variable, a good type of display is the side-by-side boxplot. Let's look at price by cut. -->
+
+<!-- ```{r echo=TRUE} -->
+<!-- ggplot(diamonds_small) + -->
+<!--   geom_boxplot(aes(x=cut, y=price, fill=cut)) -->
+<!-- ``` -->
+
+<!-- We can see that the Fair cut diamonds tend to be slightly more expensive.  -->
+
+<!-- ```{r boxplot} -->
+<!-- quiz( -->
+<!--   question("In a boxplot what does the line in the middle of the box represent?", -->
+<!--     answer("median", correct = TRUE), -->
+<!--     answer("mean"), -->
+<!--     answer("standard deviation"), -->
+<!--     answer("Interquartile range") -->
+<!--   ), -->
+<!--   question("In a boxplot what does the box represent?", -->
+<!--     answer("median"), -->
+<!--     answer("mean"), -->
+<!--     answer("standard deviation"), -->
+<!--     answer("interquartile range", correct = TRUE) -->
+<!--   ) -->
+<!-- ) -->
+<!-- ``` -->
+
+<!-- *Try it!* Examine the side-by-side boxplot of price by clarity. Is there a difference in price across the different clarity groups? Also try out `geom_violin` instead of `geom_boxplot`. What does this do?  -->
+
+<!-- ```{r violin, exercise=TRUE} -->
+
+<!-- ``` -->
 
 There is a chapter on visualisation in [R for Data Science](http://r4ds.had.co.nz/data-visualisation.html) with lots of examples. If you have time, take a skim through this and try out some of the ideas. There is also a [graphics cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf) that can be useful to learn about all sorts of geoms, options, transformations, themes, ...
 
+### (Advanced) making a heatmap
+
+Have you ever thought about why would anyone use any plots? If our data is the original complete information, then why don't we just interpret that information directly? Afterall, any plot that we make can only represent the data in limit ways because there are only limited number of visual elements we can throw onto a plot.
+
+The key to answer this question is that, a plot should be a tool of communication of key information. Yes, a data may contain lots of information, but without summarising the data in clever ways, nothing can be interpreted because data are often huge. 
+
+Let's see an example of this. In the `pokemon` data, there are `type1` and `type2` variables. These variables indicate the type of a certain Pokemon with some Pokemons having only `type1` but many Pokemons has both. So what can we do to understand the total number of Pokemons in each categories of `type1` and `type2`? 
+
+We could certainly tabulate these counts. But we would end up with 166 categories, which is still too much for us to understand. We can see the average or maximum of these counts, but this can be very limiting. This is where data visualisation can help us to see important patterns.
+
+```{r, echo = TRUE}
+poke_counts = pokemon %>% 
+  group_by(type1, type2) %>% 
+  tally()
+
+poke_counts
+```
+
+In the plot below, we see that each number is represented as a "tile", and the "fill" colour of the tile is represented by the number of pokemons in those combined categories of `type1` and `type2`.
+
+```{r, echo = TRUE}
+poke_counts %>% 
+  ggplot() +
+  geom_tile(aes(x = type1, y = type2,
+             fill = n))
+```
+
+We can further make adjustments on the plot to make it prettier. It is not necessary to understand the code below, but you should feel free to play with the different options and layers of the ggplot to see what each element is doing. 
+
+```{r, echo = TRUE}
+poke_counts %>% 
+  ggplot(aes(x = fct_reorder(type1, n, .fun = max), 
+             y = fct_reorder(type2, n, .fun = max))) +
+  geom_tile(aes(fill = n)) +
+  geom_text(aes(label = n)) +
+  scale_fill_distiller(palette = "Spectral", 
+                       breaks = c(0, 10, 20, 30, 40, 50, 60)) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.2)) +
+  labs(x = "Type 1", 
+       y = "Type 2",
+       fill = "Num. Pokemons")
+```
+
+**Try it**: 
+
++ What does `scale_fill_distiller` do? (HINT: comment this line out by adding a `#` in front of the line of code and run again)
++ What does `theme(axis.text.x = ...)` do? What if you change the `angle` to 45?
++ What does `labs(...)` do? 
++ Replace `x = fct_reorder(type1, n, .fun = max)` in the second line with just `x = type1` as we had before. What happened to the plot? Can you guess what `fct_reorder` do?
+
+## Linear model
+
+You might have hear of linear model before: it is a commonly used statistical model for numeric data. The application of a linear model is a whole subject in itself, but it has intuitive outputs and interpretations.
+
+Let's try and make a scatter plot between the weight of the Pokemons against the defense. It is probably useful to know that you can save the plot too. (We will put the `mapping` inside the `ggplot()` function for reasons that will become obvious soon.)
+
+```{r, echo=TRUE, warning = FALSE}
+plot1 = ggplot(
+  data = pokemon,
+  mapping = aes(x = defense, 
+                y = weight_kg)) +
+  geom_point()
+
+print(plot1)
+```
+
+The `lm` function (stand for "linear model") is the main function you would use to fit a linear model in `R`. It has a simple syntax: 
+
+```
+lm(response ~ predictor, data = data)
+```
+
+where: 
+
++ `response` is the dependent variable. It is often the variable you want to understand the most.
++ `predictor` is the independent variable. It is often the variable you want to relate to the response variable. 
++ `data` is a `data.frame` or a `tibble`.
++ `~` is a special symbol. I usually like to read it as "explained by". This fits in with the idea that the `response` variable is often a more complex measurement that you want to explain by some simpler measured `predictor` variable.
+
+In our plot above, we might suspect that a Pokemon's weight (y-axis) is increasing with the defense statistic (x-axis). So we would regard the weight as the response variable and the defense as the predictor variable. We can make a model and summarise the model using the `summary()` function:
+
+```{r, echo=TRUE}
+model = lm(weight_kg ~ defense, data = pokemon)
+
+summary(model)
+```
+
+Interpreting all the outputs of the summary will require years of training in statistics. However, two things that you can interpret straight the way are: 
+
+1. The "intercept" term: which is estimated as `r round(coef(model)[1], 4)`. This is the estimated weight of a Pokemon when its defense value is exactly zero. 
+2. The "slope" term: which is estimated as `r round(coef(model)[2], 4)`. This is the estimated increase in weight of a Pokemon when its defense value is increased by one unit. 
+
+Together, our linear model tells us, that even though this data has lots of points, but **on average**, a Pokemon will have `r round(coef(model)[2], 4)` increase in weight, when its defense value is increased by one units. Thus confirming a positive relationship between the two variables. 
+
+There is a good reason why we used these terms "intercept" and "slope": because the linear model is actually just a straight line that you already learnt about in high school! We can plot it on the data using ggplot! 
+
+```{r, echo=TRUE, warning = FALSE}
+plot1 + 
+  geom_smooth(method = "lm")
+```
+
+The `geom_smooth` function will want to add extra graphical elements that display relationships between variables in the data (in statistics, this is referred to as "smoothing", hence the name). `method = "lm"` indicates the method that we want to use is linear model. 
+
+You might say, hold on! We didn't tell `R` what are the response variable and the predictor variable! But you kind of already did back when you created `plot1` inside the `ggplot(aes(...))` functions, which specified `y = weight_kg` and `x = defense`. This is why these two mappings can be shared and the linear model on the plot always treats the `y` variable as the response variable and the `x` variable as the predictor variable.
+
+Fitting a linear model is often an art that requires lots of thinking and understanding of the data. For example, the linear model that we have fitted could be more suitable if we use the logarithm of the weight as the response variable (below). However, you have already learnt a lot and you should have a play on the full Pokemon data!
+
+```{r, echo=TRUE, warning = FALSE}
+plot1 + 
+  scale_y_log10(label = scales::comma_format(accuracy = 1)) +
+  geom_smooth(method = "lm")
+```
 
 ## Goal for the day
 
