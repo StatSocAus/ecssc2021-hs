@@ -27,7 +27,11 @@ Hey math boffins, welcome to the coding with R class! Let me introduce you to ou
 
 - Hi, I'm Kevin! I'm a statistician at CSL Behring.
 - I use statistics to control the quality of life-saving medicines and vaccines. 
+ 
+<img src="images/Danny.jpg" width="120px">
 
+- Hey! I'm Danny, a PhD student in statistics at The University of Queensland.
+- I work to develop transparency, honesty, and clarity in scientific knowledge discovery, through research, teaching, and software.
 
 ### Exercise 
 
