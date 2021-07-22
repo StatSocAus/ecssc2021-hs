@@ -10,7 +10,7 @@ output: html_document
 
 ## Dashboards
 
-With a few hours practice you can write impressive dashboards in a few lines of R code. Then, they can be posted online, for free. We don't have time to teach this today, but here are some of our favourite examples.
+With a few hours practice you can write impressive dashboards in a few lines of R code. Then, they can be posted online, for free (in fact, this whole tutorial is a dashboard written in R code!). We don't have time to make dashboards today, but here are some of our favourite examples.
 
 For fun examples, check out this analysis of what it's like
 [to live in the lego world](https://shiny.rstudio.com/gallery/lego-world.html),
