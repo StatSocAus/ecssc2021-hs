@@ -33,6 +33,10 @@ Hey math boffins, welcome to the coding with R class! Let me introduce you to ou
 - Hey! I'm Danny, a PhD student in statistics at The University of Queensland.
 - I work to develop transparency, honesty, and clarity in scientific knowledge discovery, through research, teaching, and software.
 
+<img src="images/patrick.jpg" width = "120px">
+- Hi, I'm Patrick! I'm a machine learning engineer at Nimble Australia.
+- I use statistics and machine learning to work out how risky it is to lend money.
+
 ### Exercise 
 
 *Introduce yourself to the other members of your team, and brainstorm a team name. You've got five minutes!* 
