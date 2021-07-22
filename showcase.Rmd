@@ -1,0 +1,27 @@
+---
+title: "Showcase"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+```
+
+
+## Dashboards
+
+With a few hours practice you can write impressive dashboards in a few lines of R code. Then, they can be posted online, for free. We don't have time to teach this today, but here are some of our favourite examples.
+
+For fun examples, check out this analysis of what it's like
+[to live in the lego world](https://shiny.rstudio.com/gallery/lego-world.html),
+or this [hex memory game](https://shiny.rstudio.com/gallery/hex-memory.html),
+or this tool to find the most similar players in 
+[pro evolution soccer 2019](https://shiny.rstudio.com/gallery/soccer-player-similarity.html),
+or this 
+[t-SNE high dimensional pokemon visualiser](https://jkunst.com/flexdashboard-highcharter-examples/pokemon/)
+
+For more serious examples, look at this map of
+[the blood banks in India](https://shiny.rstudio.com/gallery/india-blood-banks.html),
+this [3D and 4D brain MRI viewer](https://shiny.rstudio.com/gallery/mri-images.html),
+this [New Zealand trade intelligence tool](https://shiny.rstudio.com/gallery/nz-trade-dash.html),
+and this [tool for studying human physiology](https://dgranjon.shinyapps.io/entry_level/).
