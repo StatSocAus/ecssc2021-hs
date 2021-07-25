@@ -29,6 +29,9 @@ Hey math boffins, welcome to the coding with R class! Let me introduce you to ou
 - I use statistics to control the quality of life-saving medicines and vaccines. 
 
 
+- Hi, I'm Patrick! I'm a Principal Machine Learning Engineer at Nimble Australia Pty Ltd.
+- (WHAT DO YOU DO PATRICK?)
+
 ### Exercise 
 
 *Introduce yourself to the other members of your team, and brainstorm a team name. You've got five minutes!* 
@@ -38,13 +41,15 @@ Hey math boffins, welcome to the coding with R class! Let me introduce you to ou
 
 ## Let's get started learning R! 
 
-- *Login to your computer.* 
-- *Open RStudio, using `Start -> All Programs`*
-- *Create a project for your work. On the very right side of the window is a small blue R, and a drop-down menu. Select `New project`, then `New directory`, navigate to the desktop, and name the project `ChooseMATH`. This will create a folder with this name on the desktop. This will be our workspace for the day.*
+For the purpose of this tutorial, we will use this webpage to illustrate to you what R is, what it can do, and how do we use it to solve problems. 
 
-```{r fig.height = 6, fig.width = 8, fig.align='center'}
-knitr::include_graphics("images/rstudio.png")
+We will first introduce to you some concepts for you to think about, and then, you will be free to play with these ideas, and, more importantly, codes, in an interactive dialogue box.
+
+```{r first, exercise=TRUE}
+
 ```
+
+You will soon see how it all works!
 
 ## What is R!
 
@@ -54,7 +59,7 @@ R is the language of data analysis! It is the top program used for data science 
 
 RStudio is commercial product, but it is free to most of us, and it provides an interface to help us use the R language. 
 
-*If R is the airplane, RStudio is the airport terminal that provides the support.*
+*If R is an airplane, RStudio is the airport terminal that provides the support.*
 
 ## Start coding!
 
@@ -737,3 +742,8 @@ plot1 +
 At the end of the day, we will have presentations from each group about your app. 
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+
+
+# What next?
+
+(Emi to fill this out.)
