@@ -250,7 +250,19 @@ quiz(
 
 ## Loading the `pokemon` data
 
-Today, we will play with a Pokemon data. This data was originally sourced from [Kaggle](https://www.kaggle.com/rounakbanik/pokemon) and recorded important imformation about 801 Pokemons. 
+<center>
+<img src="images/pokemon_logo.png" width="200px">
+</center>
+
+Today, we will play with a Pokemon data. This data was originally sourced from [Kaggle](https://www.kaggle.com/rounakbanik/pokemon) and recorded important information about 801 Pokemons. 
+
+In this exercise, we will treat each Pokemon as a data point, and examine some key characteristics of them closely. 
+
+(If you have not played/watched Pokemon before, just think of Pokemons as little creatures that roam around in an alternate universe. Sometimes, they can battle against each other. During the battles, the "types" of these Pokemons, attack/defense statistics become important in deciding who wins.)
+
+<center>
+<img src="images/pokemon_stats.png" width="600px">
+</center>
 
 For this tutorial, you will play with a subset of these data. And we have loaded the data for you here:
 
@@ -285,7 +297,7 @@ You can find a data wrangling cheatsheet [here](https://github.com/rstudio/cheat
 
 Filter is used to pick some cases or observations (rows) in the data. Here's an example for the `pokemon` data. We will choose just the Pokemons that are "grass" type (use the `type1` variable). 
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 ## remotes::install_github("schochastics/Rokemon")
 library(Rokemon)
 
@@ -449,8 +461,9 @@ In both plots, notice that:
 
 From that perspective, both plots are presenting the same information to you! However, the second plot has one extra visual element, in that each type gets its own little plot, or "facet".
 
-We are now ready to talk about the **grammar of graphics**. The grammar of graphics is a language that maps variables into graphical elements. If you take a look at how we have described the plots above, each graphical element (x-axis, y-axis, etc) correspond to one and only one variable (`attack`, `defense`, etc). Thus, instead of uniquely naming specialist plots, like barchart, pie chart, histogram... grammar of graphics provides a consistent way to describe a plot. If the two plots are communicating the same information except the "facet" component, then it makes sense that the codes that generated the two plots should be identical except that "facet" part (we will see soon how these are generated soon). It enables us to consistently compare how plots are similar and different. It gives us a more formal, and yes, mathematical way to make data plots. 
+We are now ready to talk about the **grammar of graphics**. The grammar of graphics is a language that maps variables into graphical elements. If you take a look at how we have described the plots above, each graphical element (x-axis, y-axis, etc) correspond to one and only one variable (`attack`, `defense`, etc). 
 
+Thus, instead of uniquely naming specialist plots, like barchart, pie chart, histogram... grammar of graphics provides a consistent way to describe a plot. If the two plots are communicating the same information except the "facet" component, then it makes sense that the codes that generated the two plots should be identical except that "facet" part (we will see soon how these are generated). It enables us to consistently compare how plots are similar and different. It gives us a more formal, and yes, mathematical way to make data plots. 
 
 Grammar of graphics is implemented as a part of the `ggplot2` package which is a part of the `tidyverse`. A ggplot has these major elements:
 
@@ -481,7 +494,7 @@ The `+` operation behaves exactly like you expect: it "adds" additional graphica
 
 We will now try to construct the scatter plots above. Notice how we have described the mapping between the variables, this is exactly how we will construct the plot!
 
-```{r, echo = FALSE, fig.height=6, fig.width=6}
+```{r, echo = TRUE, fig.height=6, fig.width=6}
 ggplot(pokemon) +
   geom_point(aes(x = attack, 
                  y = defense,
@@ -490,7 +503,7 @@ ggplot(pokemon) +
 
 This plot doesn't look too bad, however, one thing that we noticed was that there are lots of types and they are overlaying on top of each other on the same plot. How would we improve over this? This is exactly why we use facets in the first example to separate out the points by types. Facetting is very easy in ggplot, it simply needs an extra line and a specification of which variable should be used as the facets.
 
-```{r, fig.height=6, fig.width=6}
+```{r, echo = TRUE, fig.height=6, fig.width=6}
 ggplot(pokemon) +
   geom_point(aes(x = attack, 
                  y = defense,
