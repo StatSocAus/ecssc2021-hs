@@ -117,6 +117,10 @@ $(document).ready(function () {
 <div class="topics">
 
 <style type="text/css">
+.showcase {
+  width: 100%;
+  height: 600px;
+}
 .photo {
   border: 1px solid black;
   border-radius: 50%;
@@ -196,11 +200,50 @@ $(document).ready(function () {
 <p><em>Introduce yourself to us!</em></p>
 </div>
 </div>
-<div id="section-dashboards" class="section level2">
-<h2>Dashboards</h2>
+<div id="section-showcase" class="section level2">
+<h2>Showcase</h2>
 <p>With a few hours practice you can write impressive dashboards in a few lines of R code. Then, they can be posted online, for free (in fact, this whole tutorial is a dashboard written in R code!). We don’t have time to make dashboards today, but here are some of our favourite examples.</p>
-<p>For fun examples, check out this analysis of what it’s like <a href="https://shiny.rstudio.com/gallery/lego-world.html">to live in the lego world</a>, or this <a href="https://shiny.rstudio.com/gallery/hex-memory.html">hex memory game</a>, or this tool to find the most similar players in <a href="https://shiny.rstudio.com/gallery/soccer-player-similarity.html">pro evolution soccer 2019</a>, or this <a href="https://jkunst.com/flexdashboard-highcharter-examples/pokemon/">t-SNE high dimensional pokemon visualiser</a></p>
-<p>For more serious examples, look at this map of <a href="https://shiny.rstudio.com/gallery/india-blood-banks.html">the blood banks in India</a>, this <a href="https://shiny.rstudio.com/gallery/mri-images.html">3D and 4D brain MRI viewer</a>, this <a href="https://shiny.rstudio.com/gallery/nz-trade-dash.html">New Zealand trade intelligence tool</a>, and this <a href="https://dgranjon.shinyapps.io/entry_level/">tool for studying human physiology</a>.</p>
+<p>For fun examples, check out:</p>
+<ul>
+<li>this analysis of what it’s like <a href="https://shiny.rstudio.com/gallery/lego-world.html">to live in the lego world</a>,</li>
+</ul>
+<iframe class="showcase" src="https://shiny.rstudio.com/gallery/lego-world.html">
+</iframe>
+<ul>
+<li>this <a href="https://shiny.rstudio.com/gallery/hex-memory.html">hex memory game</a>,</li>
+</ul>
+<iframe class="showcase" src="https://shiny.rstudio.com/gallery/hex-memory.html">
+</iframe>
+<ul>
+<li>this tool to find the most similar players in</li>
+</ul>
+<p><a href="https://shiny.rstudio.com/gallery/soccer-player-similarity.html">pro evolution soccer 2019</a>, <iframe class="showcase" src="https://shiny.rstudio.com/gallery/soccer-player-similarity.html"> </iframe></p>
+<ul>
+<li>or this <a href="https://jkunst.com/flexdashboard-highcharter-examples/pokemon/">t-SNE high dimensional pokemon visualiser</a></li>
+</ul>
+<iframe class="showcase" src="https://jkunst.com/flexdashboard-highcharter-examples/pokemon/">
+</iframe>
+<p>For more serious examples:</p>
+<ul>
+<li>look at this map of <a href="https://shiny.rstudio.com/gallery/india-blood-banks.html">the blood banks in India</a>,</li>
+</ul>
+<iframe class="showcase" src="https://shiny.rstudio.com/gallery/india-blood-banks.html">
+</iframe>
+<ul>
+<li>this <a href="https://shiny.rstudio.com/gallery/mri-images.html">3D and 4D brain MRI viewer</a>,</li>
+</ul>
+<iframe class="showcase" src="https://shiny.rstudio.com/gallery/mri-images.html">
+</iframe>
+<ul>
+<li>this <a href="https://shiny.rstudio.com/gallery/nz-trade-dash.html">New Zealand trade intelligence tool</a>,</li>
+</ul>
+<iframe class="showcase" src="https://shiny.rstudio.com/gallery/nz-trade-dash.html">
+</iframe>
+<ul>
+<li>and this <a href="https://dgranjon.shinyapps.io/entry_level/">tool for studying human physiology</a>.</li>
+</ul>
+<iframe class="showcase" src="https://dgranjon.shinyapps.io/entry_level/">
+</iframe>
 </div>
 <div id="section-lets-get-started-learning-r" class="section level2">
 <h2>Let’s get started learning R!</h2>
@@ -904,16 +947,16 @@ learnr:::store_exercise_cache("two-plus-two", list(setup = NULL, chunks = list(l
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "operators-1", 
     question = structure("Which symbol/operator is used to indicate raising a number to a power?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_56e9ed2", 
+    "character")), answers = list(structure(list(id = "lnr_ans_43c5e63", 
         option = "`+`", value = "`+`", label = structure("<code>+<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_26eda15", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_b01433f", 
         option = "`/`", value = "`/`", label = structure("<code>/<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d906f83", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_9619352", 
         option = "`^`", value = "`^`", label = structure("<code>^<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d2b9d50", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a05fe15", 
         option = "`%`", value = "`%`", label = structure("<code>%<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -925,23 +968,23 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "operators-1-answer", question = "operators-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhich symbol/operator is used to indicate raising a number to a power?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = FALSE, allow_retry = FALSE, 
-    seed = 1172395913.95406, options = list()), class = c("learnr_radio", 
+    seed = 97270401.9547049, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "operators-2", 
     question = structure("If you want to find the remainder of 5 divided by 2, which operator is used?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_b80b102", 
+    "character")), answers = list(structure(list(id = "lnr_ans_78e95c4", 
         option = "`%%`", value = "`%%`", label = structure("<code>%%<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_46c672a", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_fc63830", 
         option = "`%/%`", value = "`%/%`", label = structure("<code>%/%<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a63f70d", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_61ff918", 
         option = "`|`", value = "`|`", label = structure("<code>|<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_7cdc29", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_57ab629", 
         option = "`*`", value = "`*`", label = structure("<code>*<\u002fcode>", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -953,7 +996,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "operators-2-answer", question = "operators-2"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nIf you want to find the remainder of 5 divided by 2, which operator is used?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = FALSE, allow_retry = FALSE, 
-    seed = 64456192.9699852, options = list()), class = c("learnr_radio", 
+    seed = 634639361.204473, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
@@ -994,16 +1037,16 @@ learnr:::store_exercise_cache("functions", list(setup = NULL, chunks = list(list
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "datatypes-1", 
     question = structure("What type of variable is carat?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_8cb2b53", 
+    "character")), answers = list(structure(list(id = "lnr_ans_b46509d", 
         option = "dbl", value = "dbl", label = structure("dbl", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_21265d1", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5bec5da", 
         option = "int", value = "int", label = structure("int", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5ed6529", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_176544", 
         option = "ord", value = "ord", label = structure("ord", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_55b1fcb", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5cf04c0", 
         option = "chr", value = "chr", label = structure("chr", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -1015,23 +1058,23 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "datatypes-1-answer", question = "datatypes-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat type of variable is carat?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = FALSE, allow_retry = FALSE, 
-    seed = 390363732.818223, options = list()), class = c("learnr_radio", 
+    seed = 280277813.869485, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "datatypes-2", 
     question = structure("What type of variable is cut?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_be35053", 
+    "character")), answers = list(structure(list(id = "lnr_ans_a3e5b4e", 
         option = "dbl", value = "dbl", label = structure("dbl", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2606818", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_8f42ec", 
         option = "int", value = "int", label = structure("int", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_980feab", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_79e6ff1", 
         option = "ord", value = "ord", label = structure("ord", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c1a5162", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_cfbc56c", 
         option = "chr", value = "chr", label = structure("chr", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -1043,23 +1086,23 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "datatypes-2-answer", question = "datatypes-2"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat type of variable is cut?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = FALSE, allow_retry = FALSE, 
-    seed = 1713454014.70211, options = list()), class = c("learnr_radio", 
+    seed = 860446864.099323, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "datatypes-3", 
     question = structure("What type of variable is price?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_a992737", 
+    "character")), answers = list(structure(list(id = "lnr_ans_4678d23", 
         option = "dbl", value = "dbl", label = structure("dbl", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e5185f6", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_97b7ef4", 
         option = "int", value = "int", label = structure("int", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_6e76bc2", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_d429653", 
         option = "ord", value = "ord", label = structure("ord", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_5010ce7", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_361089f", 
         option = "chr", value = "chr", label = structure("chr", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -1071,26 +1114,26 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
         answer = "datatypes-3-answer", question = "datatypes-3"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat type of variable is price?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = FALSE, allow_retry = FALSE, 
-    seed = 1387488726.8539, options = list()), class = c("learnr_radio", 
+    seed = 1323102151.88388, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "tidydata-1", 
     question = structure("What the three interrelated rules which make a dataset tidy?", html = TRUE, class = c("html", 
-    "character")), answers = list(structure(list(id = "lnr_ans_db5368c", 
+    "character")), answers = list(structure(list(id = "lnr_ans_f44f978", 
         option = "Each variable must have its own column.", value = "Each variable must have its own column.", 
         label = structure("Each variable must have its own column.", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_18d3067", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_40694de", 
         option = "Each observation must have its own row.", value = "Each observation must have its own row.", 
         label = structure("Each observation must have its own row.", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_58bc5e0", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_81143e", 
         option = "Each value must have its own cell.", value = "Each value must have its own cell.", 
         label = structure("Each value must have its own cell.", html = TRUE, class = c("html", 
         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a03fd8a", 
+    "tutorial_quiz_answer")), structure(list(id = "lnr_ans_547e96f", 
         option = "None of these", value = "None of these", label = structure("None of these", html = TRUE, class = c("html", 
         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -1102,22 +1145,22 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
         answer = "tidydata-1-answer", question = "tidydata-1"), 
     loading = structure("<strong>Loading:<\u002fstrong> \nWhat the three interrelated rules which make a dataset tidy?\n<br/><br/><br/>", html = TRUE, class = c("html", 
     "character")), random_answer_order = FALSE, allow_retry = FALSE, 
-    seed = 96732255.4549555, options = list()), class = c("learnr_checkbox", 
+    seed = 972321182.047228, options = list()), class = c("learnr_checkbox", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "tidydata-2", question = structure("A common problem is a dataset where some of the column names are not names of variables, but values of a variable. What verb does an action which organises those columns into a new pair of variables?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_e510aa8", 
+"character")), answers = list(structure(list(id = "lnr_ans_bc0c9bd", 
     option = "gather", value = "gather", label = structure("gather", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_2004c40", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_62b2df9", 
     option = "spread", value = "spread", label = structure("spread", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_9c6d257", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_eda0122", 
     option = "mutate", value = "mutate", label = structure("mutate", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_d581c12", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_b1155b6", 
     option = "select", value = "select", label = structure("select", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
 "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -1128,22 +1171,22 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "tidydata-2-answer", question = "tidydata-2"), loading = structure("<strong>Loading:<\u002fstrong> \nA common problem is a dataset where some of the column names are not names of variables, but values of a variable. What verb does an action which organises those columns into a new pair of variables?\n<br/><br/><br/>", html = TRUE, class = c("html", 
 "character")), random_answer_order = FALSE, allow_retry = FALSE, 
-    seed = 179843748.416254, options = list()), class = c("learnr_radio", 
+    seed = 1143568111.96748, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "tidydata-3", question = structure("What verb does the opposite to gather?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_cb19621", 
+"character")), answers = list(structure(list(id = "lnr_ans_1237934", 
     option = "gather", value = "gather", label = structure("gather", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_fb73770", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_a1f5665", 
     option = "spread", value = "spread", label = structure("spread", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_9d71d80", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_38ffd35", 
     option = "mutate", value = "mutate", label = structure("mutate", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_ff38fde", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_1e3bc7d", 
     option = "select", value = "select", label = structure("select", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
 "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -1154,7 +1197,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "tidydata-3-answer", question = "tidydata-3"), loading = structure("<strong>Loading:<\u002fstrong> \nWhat verb does the opposite to gather?\n<br/><br/><br/>", html = TRUE, class = c("html", 
 "character")), random_answer_order = FALSE, allow_retry = FALSE, 
-    seed = 1295243764.39686, options = list()), class = c("learnr_radio", 
+    seed = 453632472.288761, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
