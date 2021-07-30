@@ -32,6 +32,5 @@ Hey math boffins, welcome to the coding with R class! Let me introduce you to ou
 
 ### Exercise 
 
-*Introduce yourself to the other members of your team, and brainstorm a team name. You've got five minutes!* 
+*Introduce yourself to us!* 
 
-*Nominate a spokesperson to give a 1 minute intro for the team to us all.*
