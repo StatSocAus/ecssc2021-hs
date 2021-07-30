@@ -1,0 +1,18 @@
+## Start coding!
+
+The RStudio window has mutiple panes.
+
+- *Console*: you can type R commands and see output
+- *Help*: find out information about functions and packages. This same panel will have tabs for *showing plots* that you make, *view apps* and documents, show *files* in the folder, and *packages* used. 
+- *Environment*: lists the objects that you create, such as data sets.
+- *Editor*: for creating scripts to run in pieces or as a whole (like this document!)
+
+R is a scripting language, which means that it is just like writing an essay, or a math proof. We write a script to do specific tasks, that we can run again and again, or give to someone else to run. 
+
+*Write the R code required to add two plus two (yes, it is as simple as typing `2+2` below:*
+
+```{r two-plus-two, exercise=TRUE}
+
+```
+
+*R is like a big calculator! Try doing other math operations, like subtraction, multiplication, division, or square root and power operations.*

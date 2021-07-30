@@ -1,0 +1,70 @@
+## Linear model
+
+You might have hear of linear model before: it is a commonly used statistical model for numeric data. The application of a linear model is a whole subject in itself, but it has intuitive outputs and interpretations.
+
+Let's try and make a scatter plot between the weight of the Pokemons against the defense. It is probably useful to know that you can save the plot too. (We will put the `mapping` inside the `ggplot()` function for reasons that will become obvious soon.)
+
+```{r, echo=TRUE, warning = FALSE}
+plot1 = ggplot(
+  data = pokemon,
+  mapping = aes(x = defense, 
+                y = weight_kg)) +
+  geom_point()
+
+print(plot1)
+```
+
+The `lm` function (stand for "linear model") is the main function you would use to fit a linear model in `R`. It has a simple syntax: 
+
+```
+lm(response ~ predictor, data = data)
+```
+
+where: 
+
++ `response` is the dependent variable. It is often the variable you want to understand the most.
++ `predictor` is the independent variable. It is often the variable you want to relate to the response variable. 
++ `data` is a `data.frame` or a `tibble`.
++ `~` is a special symbol. I usually like to read it as "explained by". This fits in with the idea that the `response` variable is often a more complex measurement that you want to explain by some simpler measured `predictor` variable.
+
+In our plot above, we might suspect that a Pokemon's weight (y-axis) is increasing with the defense statistic (x-axis). So we would regard the weight as the response variable and the defense as the predictor variable. We can make a model and summarise the model using the `summary()` function:
+
+```{r, echo=TRUE}
+model = lm(weight_kg ~ defense, data = pokemon)
+
+summary(model)
+```
+
+Interpreting all the outputs of the summary will require years of training in statistics. However, two things that you can interpret straight the way are: 
+
+1. The "intercept" term: which is estimated as `r round(coef(model)[1], 4)`. This is the estimated weight of a Pokemon when its defense value is exactly zero. 
+2. The "slope" term: which is estimated as `r round(coef(model)[2], 4)`. This is the estimated increase in weight of a Pokemon when its defense value is increased by one unit. 
+
+Together, our linear model tells us, that even though this data has lots of points, but **on average**, a Pokemon will have `r round(coef(model)[2], 4)` increase in weight, when its defense value is increased by one units. Thus confirming a positive relationship between the two variables. 
+
+There is a good reason why we used these terms "intercept" and "slope": because the linear model is actually just a straight line that you already learnt about in high school! We can plot it on the data using ggplot! 
+
+```{r, echo=TRUE, warning = FALSE}
+plot1 + 
+  geom_smooth(method = "lm")
+```
+
+The `geom_smooth` function will want to add extra graphical elements that display relationships between variables in the data (in statistics, this is referred to as "smoothing", hence the name). `method = "lm"` indicates the method that we want to use is linear model. 
+
+You might say, hold on! We didn't tell `R` what are the response variable and the predictor variable! But you kind of already did back when you created `plot1` inside the `ggplot(aes(...))` functions, which specified `y = weight_kg` and `x = defense`. This is why these two mappings can be shared and the linear model on the plot always treats the `y` variable as the response variable and the `x` variable as the predictor variable.
+
+Fitting a linear model is often an art that requires lots of thinking and understanding of the data. For example, the linear model that we have fitted could be more suitable if we use the logarithm of the weight as the response variable (below). However, you have already learnt a lot and you should have a play on the full Pokemon data!
+
+```{r, echo=TRUE, warning = FALSE}
+plot1 + 
+  scale_y_log10(label = scales::comma_format(accuracy = 1)) +
+  geom_smooth(method = "lm")
+```
+
+## Goal for the day
+
+*The task for the rest of the day is to enhance the app that we have started. Add more features, change the plots, add more data, ... the choice is up to you. Come up with something that you think your friends, teachers or parents might like to explore about the PISA data.*
+
+At the end of the day, we will have presentations from each group about your app. 
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.

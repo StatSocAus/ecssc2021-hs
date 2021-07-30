@@ -1,0 +1,27 @@
+## Loading the `pokemon` data
+
+<center>
+<img src="images/pokemon_logo.png" width="200px">
+</center>
+
+Today, we will play with a Pokemon data. This data was originally sourced from [Kaggle](https://www.kaggle.com/rounakbanik/pokemon) and recorded important information about 801 Pokemons. 
+
+In this exercise, we will treat each Pokemon as a data point, and examine some key characteristics of them closely. 
+
+(If you have not played/watched Pokemon before, just think of Pokemons as little creatures that roam around in an alternate universe. Sometimes, they can battle against each other. During the battles, the "types" of these Pokemons, attack/defense statistics become important in deciding who wins.)
+
+<center>
+<img src="images/pokemon_stats.png" width="600px">
+</center>
+
+For this tutorial, you will play with a subset of these data. And we have loaded the data for you here:
+
+```{r, echo = TRUE}
+pokemon = read_csv("data/pokemon_demo.csv")
+```
+
+If you want, you can play with the full data at the end of this tutorial by running the code: 
+
+```{r, eval = FALSE, echo = TRUE}
+pokemon = read_csv("data/pokemon_full.csv")
+```

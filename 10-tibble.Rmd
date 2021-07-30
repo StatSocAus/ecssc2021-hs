@@ -1,0 +1,29 @@
+## Back to tibbles and matrices
+
+The whole data set, diamonds is what the tidyverse calls a `tibble`. Tibble is a play on the word table! But it means data in a rectangular format, where there may be different types of variables (numeric, categorical, dates, ...) in different columns. A tibble is a special case of a `data.frame`. You can check the type of data object with a query:
+
+```{r echo=TRUE}
+is_tibble(diamonds)
+is.data.frame(diamonds)
+is.matrix(diamonds)
+```
+
+*Aside: The tidyverse tends to use `_` in its function names. Older parts of R tend to use `.` to separate words in function names.*
+
+So diamonds is a tibble and a data.frame, but it is not a matrix. 
+
+When you simulated the sample from a normal model, 
+
+```{r echo=TRUE}
+x <- rnorm(100)
+is_tibble(x)
+is.data.frame(x)
+is.matrix(x)
+is.vector(x)
+```
+
+you created a `vector`. A vector is a column of numbers, and a `matrix` is a rectangular format of data, like a tibble, it has variables in columns, but it can only contain numeric values. 
+
+Knowing the data type, is important because some functions expect one sort of data and can throw an error if it gets something different. You can convert data objects between types. 
+
+A good resource on learning more about the `tidyverse` is the book "R for Data Science" by Garret Grolemund and Hadley Wickham. [You can read it free online.](http://r4ds.had.co.nz/)

@@ -1,0 +1,11 @@
+## Let's get started learning R! 
+
+For the purpose of this tutorial, we will use this webpage to illustrate to you what R is, what it can do, and how do we use it to solve problems. 
+
+We will first introduce to you some concepts for you to think about, and then, you will be free to play with these ideas, and, more importantly, codes, in an interactive dialogue box.
+
+```{r first, exercise=TRUE}
+
+```
+
+You will soon see how it all works!

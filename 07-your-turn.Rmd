@@ -1,0 +1,3 @@
+## YOUR TURN
+
+With your team, experiment with writing functions, in your RStudio Window. Try to write a function that simulates a sample of size $n$ from a normal model, allowing the user to input the population mean and standard deviation. The retun values form the function should be the mean and standard deviation of the sample.

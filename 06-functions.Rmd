@@ -1,0 +1,38 @@
+## Functions
+
+In math, we use functions all the time. Functions have inputs and outputs, e.g. $f(x) = 3x^2+x+1$
+
+R can be considered to be a functional language. These are functions that we have just used, `rnorm(), mean(), sd()`. 
+
+What does a function in R look like? The polynomial function above would look like this in R:
+
+```
+mypolyfn <- function(x) {
+  f <- 3*x^2 + x + 1
+  return(f)
+}
+```
+
+It takes `x` as the input, and returns `f` as output. The benefit of functions is that it makes your work more efficient - anything that you need to do again and again, or on different sets of data, should be programmed into a function.
+
+*Try it!* Write the function below, so that it is defined. And then test it out by inputting different values of `x`, e.g. `mypolyfn(2)`, or `mypolyfn(-1)`, or even entering a vector of `x`'s, `mypolyfn(seq(-5, 5, 1))`
+
+```{r functions, exercise=TRUE}
+
+```
+
+What can go wrong?
+
+This function is expecting `x` to be a number. If the user inputs something other that a number, what happens? 
+
+*Try it!* Try running your function with a text string of your team name instead of a number, e.g. `mypolyfn("numbat")`.
+
+You get an error. Well-written functions check for silly user errors. A better version of the function would be:
+
+```
+mypolyfn <- function(x) {
+  stopifnot(is.numeric(x))
+  f <- 3*x^2 + x + 1
+  return(f)
+}
+```

@@ -1,0 +1,19 @@
+## Quiz
+
+```{r operators}
+quiz(
+  question("Which symbol/operator is used to indicate raising a number to a power?",
+    answer("`+`"),
+    answer("`/`"),
+    answer("`^`", correct = TRUE),
+    answer("`%`")
+  ),
+  question("If you want to find the remainder of 5 divided by 2, which operator is used?",
+    answer("`%%`", correct = TRUE),
+    answer("`%/%`"),
+    answer("`|`"),
+    answer("`*`")
+    )
+)
+```
+

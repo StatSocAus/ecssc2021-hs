@@ -1,0 +1,26 @@
+## Quiz
+
+Look at the data summary and answer these questions:
+
+```{r datatypes}
+quiz(
+  question("What type of variable is carat?",
+    answer("dbl", correct = TRUE),
+    answer("int"),
+    answer("ord"),
+    answer("chr")
+  ),
+  question("What type of variable is cut?",
+    answer("dbl"),
+    answer("int"),
+    answer("ord", correct = TRUE),
+    answer("chr")
+    ),
+  question("What type of variable is price?",
+    answer("dbl"),
+    answer("int", correct = TRUE),
+    answer("ord"),
+    answer("chr")
+    )
+)
+```

@@ -1,0 +1,9 @@
+## What is R!
+
+The R project is a huge open source software collaboration. There is a foundation team of 36 people, and contributions from thousands of people globally. You can learn more about the project by visiting this web site [https://www.r-project.org](https://www.r-project.org).
+
+R is the language of data analysis! It is the top program used for data science today, one of the most powerful tools available, and completely free for anyone to use. 
+
+RStudio is commercial product, but it is free to most of us, and it provides an interface to help us use the R language. 
+
+*If R is an airplane, RStudio is the airport terminal that provides the support.*

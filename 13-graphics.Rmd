@@ -1,0 +1,238 @@
+## Grammar of graphics
+
+Before we begin this section, I would like to invite you to take a look at two plots below and tell me what do you think the (only) difference is between the two plots?
+
+```{r, echo = FALSE, fig.height=6, fig.width=6}
+pokemon %>% 
+  ggplot(aes(x = attack, 
+             y = defense,
+             colour = type1)) +
+  geom_point()
+```
+
+
+```{r, echo = FALSE, fig.height=6, fig.width=6}
+pokemon %>% 
+  ggplot(aes(x = attack, 
+             y = defense,
+             colour = type1)) +
+  geom_point() +
+  facet_wrap(~type1)
+```
+
+
+In both plots, notice that:
+
++ x-axis is `attack`
++ y-axis is `defense`
++ Each observation (a Pokemon) is a simple point
++ colouring on the points is `type1`
+
+From that perspective, both plots are presenting the same information to you! However, the second plot has one extra visual element, in that each type gets its own little plot, or "facet".
+
+We are now ready to talk about the **grammar of graphics**. The grammar of graphics is a language that maps variables into graphical elements. If you take a look at how we have described the plots above, each graphical element (x-axis, y-axis, etc) correspond to one and only one variable (`attack`, `defense`, etc). 
+
+Thus, instead of uniquely naming specialist plots, like barchart, pie chart, histogram... grammar of graphics provides a consistent way to describe a plot. If the two plots are communicating the same information except the "facet" component, then it makes sense that the codes that generated the two plots should be identical except that "facet" part (we will see soon how these are generated). It enables us to consistently compare how plots are similar and different. It gives us a more formal, and yes, mathematical way to make data plots. 
+
+Grammar of graphics is implemented as a part of the `ggplot2` package which is a part of the `tidyverse`. A ggplot has these major elements:
+
+```
+ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(
+     mapping = aes(<MAPPINGS>),
+     stat = <STAT>, 
+     position = <POSITION>
+  ) +
+  <COORDINATE_FUNCTION> +
+  <FACET_FUNCTION>
+```
+  
+- **DATA**: This is the `data.frame` or `tibble` that you are starting from
+- **MAPPINGS**: Specific details of how a variable is mapped into the plot
+- **GEOM**: The graphical element to use, e.g. point, line, rectangle, density, boxplot, ...
+- **STAT**: A statistical calculation, if necessary, e.g. bin to make a histogram or barchart.
+- **POSITION**: Some types of plots, like barcharts conventionally have small deviations in design, like stacked, side-by-side, 100%. Position enables this type of shift.
+- **COORDINATE**: Most commonly we are using cartesian coordinates, but some plots benefit by putting them in polar coordinates, or even in a special map ratio, or some variables shown on a log scale.
+- **FACET**: Split the data into subsets and plot separately. Good for making comparisons across groups. 
+
+The `+` operation behaves exactly like you expect: it "adds" additional graphical elements or manipulations on the plot. This is similar to how you would draw a picture in real life first by finding some contents (in our case, the data) to draw on, then deciding what should be in the picture (the geom) and finally adding on other elements (the mappings, e.g. colours).
+
+
+
+### Making scatter plot
+
+We will now try to construct the scatter plots above. Notice how we have described the mapping between the variables, this is exactly how we will construct the plot!
+
+```{r, echo = TRUE, fig.height=6, fig.width=6}
+ggplot(pokemon) +
+  geom_point(aes(x = attack, 
+                 y = defense,
+                 colour = type1))
+```
+
+This plot doesn't look too bad, however, one thing that we noticed was that there are lots of types and they are overlaying on top of each other on the same plot. How would we improve over this? This is exactly why we use facets in the first example to separate out the points by types. Facetting is very easy in ggplot, it simply needs an extra line and a specification of which variable should be used as the facets.
+
+```{r, echo = TRUE, fig.height=6, fig.width=6}
+ggplot(pokemon) +
+  geom_point(aes(x = attack, 
+                 y = defense,
+                 colour = type1)) +
+  facet_wrap(~type1)
+```
+
+This plot is better in that we can compare the scattering of points across different types of Pokemons now whereas before, our eyes are too busy trying to identify the colours. In fact, you will notice that we used the `type1` variable twice, which means that this variable appeared twice as two different visual elements - once as colour and once as facets. This is ok, but it can be redundant. Having a consistent way of describing plots allows us to notice such things and we may even decide removing `type1` as a colour variable. 
+
+**Try it:** remove the `type1` as the colouring variable in the plot above. What is the default colour of `geom_point`?
+
+```{r ggplot-point, exercise = TRUE}
+
+```
+
+<!-- Here are some examples. We will use with a smaller subset of the diamonds for efficiency. -->
+
+<!-- ```{r echo=TRUE} -->
+<!-- diamonds_small <- diamonds %>% sample_n(1000) -->
+<!-- ggplot(diamonds_small) + -->
+<!--   geom_point(aes(x=carat, y=price)) -->
+<!-- ``` -->
+
+<!-- This is a scatterplot of price by carat. There is a hint in the plot that carat tends to fall along some standard values, e.g. 1, 1.5, ... There are more small diamonds than larger ones - we would describe carat as right-skewed. Price is also right-skewed, as there are many more low prices diamonds than expensive ones.  -->
+
+<!-- ```{r echo=TRUE} -->
+<!-- ggplot(diamonds_small) + -->
+<!--   geom_bar(aes(x=cut)) -->
+<!-- ``` -->
+
+<!-- This is a barchart of cut of the diamond. We can see that most diamonds have an "Ideal" cut, and there are very few "Fair" cut diamonds. -->
+
+<!-- ```{r echo=TRUE} -->
+<!-- ggplot(diamonds_small) + -->
+<!--   geom_point(aes(x=carat, y=price, colour=cut)) -->
+<!-- ``` -->
+
+<!-- This is a scatterplot of price by carat, where points are coloured by the cut of the diamond. It is hard to see much difference in price between the cuts, there's a lot of overlap. It can be helpful to focus the view to display a model fit, instead of (or with) the points.  -->
+
+<!-- ```{r echo=TRUE} -->
+<!-- ggplot(diamonds_small) + -->
+<!--   geom_smooth(aes(x=carat, y=price, colour=cut), se=FALSE) -->
+<!-- ``` -->
+
+<!-- There's really not much difference, at least for this subset. Maybe the Ideal cut has very slightly higher relative price. -->
+
+<!-- Let's now look at two categorical variables. We examine cut and clarity. (Note that with a barchart, we need to use `fill` rather than `colour` to paint in the bars.) -->
+
+<!-- ```{r echo=TRUE} -->
+<!-- ggplot(diamonds_small) + -->
+<!--   geom_bar(aes(x=cut, fill=clarity)) -->
+<!-- ``` -->
+
+<!-- To examine the association between two categorical variables, it can be better to focus on proportions, rather than counts. The counts in the different cut categories are very different, and its hard to be able to say that the proportion of the clarity categories are the same or different in each bar. Here's where position helps: -->
+
+<!-- ```{r echo=TRUE} -->
+<!-- ggplot(diamonds_small) + -->
+<!--   geom_bar(aes(x=cut, fill=clarity), position="fill") -->
+<!-- ``` -->
+
+<!-- Now we can see that there are differences in the clarity for different cuts. The Ideal cut tends not to have I1 clarity diamonds, and the Fair cut diamonds tend not to have any IF clarity diamonds.  -->
+
+<!-- *Try it!* Change the position to be `dodge`, and see what type of plot is created. -->
+
+<!-- ```{r dodge, exercise=TRUE} -->
+
+<!-- ``` -->
+
+<!-- Its also possible to make separate plots for each of the clarity categories, using facet: -->
+
+<!-- ```{r echo=TRUE} -->
+<!-- ggplot(diamonds_small) + -->
+<!--   geom_bar(aes(x=cut, fill=clarity)) + -->
+<!--   facet_wrap(~clarity, ncol=4, scales="free_x") + -->
+<!--   coord_flip() + theme(legend.position="bottom") -->
+<!-- ``` -->
+
+<!-- Now we can see the the distribution of cuts is different in the l1 and SI2 clarity categories, but fairly similar in the others. The IF clarity group is almost exclusively Ideal cut.  -->
+
+<!-- When you have a categorical variable, and a quantitative variable, a good type of display is the side-by-side boxplot. Let's look at price by cut. -->
+
+<!-- ```{r echo=TRUE} -->
+<!-- ggplot(diamonds_small) + -->
+<!--   geom_boxplot(aes(x=cut, y=price, fill=cut)) -->
+<!-- ``` -->
+
+<!-- We can see that the Fair cut diamonds tend to be slightly more expensive.  -->
+
+<!-- ```{r boxplot} -->
+<!-- quiz( -->
+<!--   question("In a boxplot what does the line in the middle of the box represent?", -->
+<!--     answer("median", correct = TRUE), -->
+<!--     answer("mean"), -->
+<!--     answer("standard deviation"), -->
+<!--     answer("Interquartile range") -->
+<!--   ), -->
+<!--   question("In a boxplot what does the box represent?", -->
+<!--     answer("median"), -->
+<!--     answer("mean"), -->
+<!--     answer("standard deviation"), -->
+<!--     answer("interquartile range", correct = TRUE) -->
+<!--   ) -->
+<!-- ) -->
+<!-- ``` -->
+
+<!-- *Try it!* Examine the side-by-side boxplot of price by clarity. Is there a difference in price across the different clarity groups? Also try out `geom_violin` instead of `geom_boxplot`. What does this do?  -->
+
+<!-- ```{r violin, exercise=TRUE} -->
+
+<!-- ``` -->
+
+There is a chapter on visualisation in [R for Data Science](http://r4ds.had.co.nz/data-visualisation.html) with lots of examples. If you have time, take a skim through this and try out some of the ideas. There is also a [graphics cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf) that can be useful to learn about all sorts of geoms, options, transformations, themes, ...
+
+### (Advanced) making a heatmap
+
+Have you ever thought about why would anyone use any plots? If our data is the original complete information, then why don't we just interpret that information directly? Afterall, any plot that we make can only represent the data in limit ways because there are only limited number of visual elements we can throw onto a plot.
+
+The key to answer this question is that, a plot should be a tool of communication of key information. Yes, a data may contain lots of information, but without summarising the data in clever ways, nothing can be interpreted because data are often huge. 
+
+Let's see an example of this. In the `pokemon` data, there are `type1` and `type2` variables. These variables indicate the type of a certain Pokemon with some Pokemons having only `type1` but many Pokemons has both. So what can we do to understand the total number of Pokemons in each categories of `type1` and `type2`? 
+
+We could certainly tabulate these counts. But we would end up with 166 categories, which is still too much for us to understand. We can see the average or maximum of these counts, but this can be very limiting. This is where data visualisation can help us to see important patterns.
+
+```{r, echo = TRUE}
+poke_counts = pokemon %>% 
+  group_by(type1, type2) %>% 
+  tally()
+
+poke_counts
+```
+
+In the plot below, we see that each number is represented as a "tile", and the "fill" colour of the tile is represented by the number of pokemons in those combined categories of `type1` and `type2`.
+
+```{r, echo = TRUE}
+poke_counts %>% 
+  ggplot() +
+  geom_tile(aes(x = type1, y = type2,
+             fill = n))
+```
+
+We can further make adjustments on the plot to make it prettier. It is not necessary to understand the code below, but you should feel free to play with the different options and layers of the ggplot to see what each element is doing. 
+
+```{r, echo = TRUE}
+poke_counts %>% 
+  ggplot(aes(x = fct_reorder(type1, n, .fun = max), 
+             y = fct_reorder(type2, n, .fun = max))) +
+  geom_tile(aes(fill = n)) +
+  geom_text(aes(label = n)) +
+  scale_fill_distiller(palette = "Spectral", 
+                       breaks = c(0, 10, 20, 30, 40, 50, 60)) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.2)) +
+  labs(x = "Type 1", 
+       y = "Type 2",
+       fill = "Num. Pokemons")
+```
+
+**Try it**: 
+
++ What does `scale_fill_distiller` do? (HINT: comment this line out by adding a `#` in front of the line of code and run again)
++ What does `theme(axis.text.x = ...)` do? What if you change the `angle` to 45?
++ What does `labs(...)` do? 
++ Replace `x = fct_reorder(type1, n, .fun = max)` in the second line with just `x = type1` as we had before. What happened to the plot? Can you guess what `fct_reorder` do?
+

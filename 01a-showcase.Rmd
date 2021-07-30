@@ -1,12 +1,3 @@
----
-title: "Showcase"
-output: html_document
----
-
-```{r setup, include=FALSE}
-
-```
-
 
 ## Dashboards
 

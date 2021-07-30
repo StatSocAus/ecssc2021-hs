@@ -1,0 +1,150 @@
+## Wrangling verbs
+
+The vast majority of data cleaning tasks can be handled with five verbs:
+
+- `filter()` Pick observations by their values.
+- `arrange()` Reorder the rows.
+- `select()` Pick variables by their names.
+- `mutate()` Create new variables with functions of existing variables.
+- `summarise()` Collapse many values down to a single summary.
+
+Oh, and if you use the pipe, `%>%`, you can string several of these actions together to make a data pipeline.
+
+You can find a data wrangling cheatsheet [here](https://github.com/rstudio/cheatsheets/raw/master/source/pdfs/data-transformation-cheatsheet.pdf).
+
+
+### Filter
+
+Filter is used to pick some cases or observations (rows) in the data. Here's an example for the `pokemon` data. We will choose just the Pokemons that are "grass" type (use the `type1` variable). 
+
+```{r, eval = FALSE}
+## remotes::install_github("schochastics/Rokemon")
+library(Rokemon)
+
+readr::write_csv(
+  x = Rokemon::pokemon %>% 
+    dplyr::select(pokedex_number, name, 
+                  type1, type2, 
+                  # generation, is_legendary,
+                  height_m, weight_kg,
+                  attack, defense
+                  # hp, speed,
+                  # sp_attack, sp_defense
+                  ),
+  file = "./data/pokemon_demo.csv")
+
+readr::write_csv(
+  x = Rokemon::pokemon %>% dplyr::select(-abilities),
+  file = "./data/pokemon_full.csv")
+```
+
+```{r echo=TRUE}
+pokemon %>% filter(type1 == "grass")
+```
+
+*Try it!* Do these exercises:
+
+- Filter the `pokemon` data to pick only Pokemons that are "fire" type (use the `type2` variable)
+- Filter the Pokemons that are more than 150 units in `attack` (HINT: you can use `>` or `<` if the variable is just made up of numbers)
+- Filter the Pokemons that are either "fire" in `type1` **or** "water" in `type1` (HINT: You need to use the operator `%in%` like this `%in% c("fire","water"))`
+- Filter the POkemons that are "fire" in `type1` **and** "water" in `type2` (HINT: You can add additional conditions in the `filter` function by adding an extra comma like `filter(type1 == "fire", ...)`)
+
+```{r, eval = FALSE}
+pokemon %>% filter(type2 == "fire")
+pokemon %>% filter(attack > 150)
+pokemon %>% filter(type1 %in% c("fire", "water"))
+pokemon %>% filter(type1 == "fire", type2 == "water")
+```
+
+```{r filter, exercise=TRUE}
+
+```
+
+### Select
+
+Select is used to pick some variables in the data. Here's an example for the `pokemon` data. We will select just the variables `name` and `attack`.
+
+```{r echo=TRUE}
+pokemon %>% select(name, attack) 
+```
+
+*Try it!* Select the variables `name`, `type1`, `attack` and `defense`.
+
+```{r select, exercise=TRUE}
+
+```
+
+### Arrange
+
+`arrange` sorts the data by values in one of the columns. Here's an example which also involves selecting a subset of variables.
+
+```{r echo=TRUE}
+pokemon %>% 
+  select(name, attack) %>%
+  arrange(desc(attack))
+```
+
+Note that `desc` arranges in descending order. 
+
+*Try it!* Arrange Pokemons by `attack`, in increasing order.
+
+```{r arrange, exercise=TRUE}
+
+```
+
+Arrange is mostly used to get quick views of the numbers.
+
+### Mutate
+
+I love the name mutate! It means to create new variables, or modify existing ones. For the `pokemon` dataset, we might be interested in examining the sum of both `attack` and `defense` as a simple way of summairsing a Pokemon's ability. Here's how we can create this variable:
+
+```{r echo=TRUE}
+pokemon %>% 
+  mutate(total = attack + defense)
+```
+
+*Try it!* Compute a new variable called `bmi` (body mass index), which is computed as:
+
+$$bmi = \frac{\text{weight}}{\text{height}^2}.$$
+
+```{r mutate, exercise=TRUE}
+
+```
+
+### Summarise
+
+Summarise is the workhorse function. It takes columns of the data, and reduces them to single numbers. It is most useful when we want to compute statistics for our. 
+
+For the `pokemon` data, we might be interested in computing the mean, minimum and maximum of `attack` value of all Pokemons. 
+
+```{r echo=TRUE}
+pokemon %>% 
+  summarise(
+    min = min(attack),
+    mean = mean(attack),
+    max = max(attack)
+  )
+```
+S
+However, the `attack` value might be dependent on the type of the Pokemons, so we can compute this separately for each of the `type1` categories. Which type of Pokemon has the highest average `attack`?
+
+```{r echo=TRUE}
+pokemon %>% 
+  group_by(type1) %>% 
+  summarise(mean = mean(attack))
+```
+
+If it helps, we can use `arrange` to better help us to answer this question. 
+
+```{r}
+pokemon %>% 
+  group_by(type1) %>% 
+  summarise(mean = mean(attack)) %>% 
+  arrange(desc(mean))
+```
+
+*Try it!* Compute the mean and standard deviation for (a) `attack`, (b) `defense`.
+
+```{r summarise, exercise=TRUE}
+
+```

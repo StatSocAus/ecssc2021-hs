@@ -1,0 +1,26 @@
+## YOUR TURN: Tidy data verbs
+
+With your group read sections 12.1-12.3 of [R for Data Science](http://r4ds.had.co.nz/tidy-data.html). Then answer these questions:
+
+```{r tidydata}
+quiz(
+  question("What the three interrelated rules which make a dataset tidy?",
+    answer("Each variable must have its own column.", correct = TRUE),
+    answer("Each observation must have its own row.", correct = TRUE),
+    answer("Each value must have its own cell.", correct = TRUE),
+    answer("None of these")
+  ),
+  question("A common problem is a dataset where some of the column names are not names of variables, but values of a variable. What verb does an action which organises those columns into a new pair of variables?",
+    answer("gather", correct = TRUE),
+    answer("spread"),
+    answer("mutate"),
+    answer("select")
+    ),
+  question("What verb does the opposite to gather?",
+    answer("gather"),
+    answer("spread", correct = TRUE),
+    answer("mutate"),
+    answer("select")
+    ) 
+)
+```
