@@ -30,3 +30,7 @@ The resources below are all free!
 ### Acknowledgement
 
 This workshop is built on materials by [R forwards](https://forwards.github.io/edu/workshops/).
+
+<div class="info-box">
+All materials to generate this tutorial can be found at https://github.com/StatSocAus/ecssc2021-hs
+</div>
