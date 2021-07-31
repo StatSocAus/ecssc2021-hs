@@ -3,8 +3,20 @@
 
 ## What next?
 
+### Resources
+
+The resources below are all free!
+
+* [Teacup giraffes and stats](https://tinystats.github.io/teacups-giraffes-and-statistics/01_introToR.html): a gentle introduction to statistics and R
+* [R for Data Science](https://r4ds.had.co.nz/)
+* [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday)
+* [Big Book of R](https://www.bigbookofr.com/)
+
+### Community
+
 **Join a community!** Learn together!
 
+* R for data science community [<i class="fas fa-globe"></i>](https://www.rfordatasci.com/) [<i class="fab fa-slack"></i>](https://rfordatascience.slack.com/join/shared_invite/zt-n46lijeb-2RRzQ70U34eH530~PyZsmg#/shared-invite/email)
 * Australian Local [R-Ladies](https://rladies.org/) Chapters:
   * R-Ladies Melbourne [<i class="fab fa-meetup"></i>](https://www.meetup.com/en-AU/rladies-melbourne/) [<i class="fab fa-twitter"></i>](https://twitter.com/RLadiesMelb)
   * R-Ladies Sydney [<i class="fab fa-meetup"></i>](https://www.meetup.com/en-AU/rladies-sydney/) [<i class="fab fa-twitter"></i>](https://twitter.com/RLadiesSydney)
@@ -12,9 +24,7 @@
   * R-Ladies Perth [<i class="fab fa-meetup"></i>](https://www.meetup.com/en-AU/rladies-perth/) [<i class="fab fa-twitter"></i>](https://twitter.com/RLadiesPerth)
   * R-Ladies Adelaide [<i class="fab fa-meetup"></i>](https://www.meetup.com/en-AU/rladies-adelaide/) [<i class="fab fa-twitter"></i>](https://twitter.com/RLadiesAdelaide)
   * R-Ladies Brisbane [<i class="fab fa-meetup"></i>](https://www.meetup.com/en-AU/rladies-brisbane/) [<i class="fab fa-twitter"></i>](https://twitter.com/RLadiesBrisbane)
-* R for data science community [<i class="fas fa-globe"></i>](https://www.rfordatasci.com/) [<i class="fab fa-slack"></i>](https://rfordatascience.slack.com/join/shared_invite/zt-n46lijeb-2RRzQ70U34eH530~PyZsmg#/shared-invite/email)
-* [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday)
-* [Big Book of R](https://www.bigbookofr.com/)
+
 
 
 ### Acknowledgement

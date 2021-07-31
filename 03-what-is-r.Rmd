@@ -4,6 +4,14 @@ The R project is a huge open source software collaboration. There is a foundatio
 
 R is the language of data analysis! It is the top program used for data science today, one of the most powerful tools available, and completely free for anyone to use. 
 
-RStudio is commercial product, but it is free to most of us, and it provides an interface to help us use the R language. 
+RStudio IDE (interactive development environment) is a commercial product, but it is _free_ to download and use, and it provides an interface to help us use the R language. You can download RStudio IDE at https://www.rstudio.com/products/rstudio/download/. 
 
 *If R is an airplane, RStudio is the airport terminal that provides the support.*
+
+
+The RStudio window has multiple panes.
+
+- *Console*: you can type R commands and see output
+- *Help*: find out information about functions and packages. This same panel will have tabs for *showing plots* that you make, *view apps* and documents, show *files* in the folder, and *packages* used. 
+- *Environment*: lists the objects that you create, such as data sets.
+- *Editor*: for creating scripts to run in pieces or as a whole (like this document!)
