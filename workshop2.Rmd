@@ -1,5 +1,5 @@
 ---
-title: "Tutorial"
+title: "Early Career and Student Statistician Conference 2021 Tutorial"
 output: 
   learnr::tutorial:
     toc_depth: 3
